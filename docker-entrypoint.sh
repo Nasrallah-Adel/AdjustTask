@@ -7,7 +7,8 @@ echo "Waiting for Postgres DB"
 sleep 10
 
 echo "Postgres DB is ready"
-
+echo "fill database with data"
+./manage.py init_db_data
 echo "Collect statics"
 ./manage.py collectstatic --no-input
 # create tables

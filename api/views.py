@@ -17,6 +17,7 @@ class StandardResultsSetPagination(PageNumberPagination):
 
 
 class SearchListView(ListAPIView):
+    # queryset = Logs.objects.all().order_by('id').distinct()
     queryset = Logs.objects.all().order_by('id').distinct()
     pagination_class = StandardResultsSetPagination
     serializer_class = LogSerializer

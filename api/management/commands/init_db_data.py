@@ -1,6 +1,7 @@
 import csv
 
 from django.core.management.base import BaseCommand
+from django.db.models import Sum
 
 from api.models import Logs
 
@@ -33,3 +34,5 @@ class Command(BaseCommand):
                 print(f'Processed {line_count} lines.')
         else:
             print("Database Already have data")
+        print(Logs.objects.filter(date__lte='2017-06-01').values('channel','country').order_by().annotate(Sum('impressions'),
+                                                                                       Sum('clicks')))

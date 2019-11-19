@@ -1,0 +1,50 @@
+version: '3.3'
+
+services:
+  db:
+    ports:
+      - 4444:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: adjust
+      POSTGRES_PASSWORD: postgres
+    image: postgres:10.1-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+  nginx:
+    image: nginx:1.15-alpine
+    restart: unless-stopped
+    volumes:
+      - Adjust_run:/run/
+      - ./nginx:/etc/nginx/conf.d
+      - ./static:/static
+
+    ports:
+      - "80:80"
+      - "443:443"
+
+
+  adjust_app:
+    environment:
+      PG_USER: postgres
+      PG_NAME: adjust
+      PG_PASSWORD: postgres
+      PG_HOSTNAME: db
+    build: .
+    image: adjust_app
+    entrypoint: /docker-entrypoint.sh
+
+    volumes:
+      - .:/opt/AdjustTask
+      - Adjust_run:/run/
+      - ./static:/static
+    depends_on:
+      - db
+      - nginx
+
+
+volumes:
+  postgres_data:
+
+  Adjust_run:

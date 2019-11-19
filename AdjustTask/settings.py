@@ -7,7 +7,7 @@ SECRET_KEY = '*fssyg@u3mox1q1_#rqioe0_6n9-77a=3k=aa7&mc1&7ony_rl'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['adjust.localhost','127.0.0.1','localhost']
+ALLOWED_HOSTS = ['adjust.localhost', '127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -18,9 +18,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
     'rest_framework_swagger',
-    'api'
+    'rest_framework',
+
+    'api',
 ]
 
 MIDDLEWARE = [

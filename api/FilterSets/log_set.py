@@ -32,17 +32,18 @@ class CpiFilter(Filter):
 
 
 class LogFilter(FilterSet):
-    date_mx = filters.DateFilter(field_name='date', lookup_expr='lte')
-    date_mn = filters.DateFilter(field_name='date', lookup_expr='gte')
+    date_to = filters.DateFilter(field_name='date', lookup_expr='lte')
+    date_from = filters.DateFilter(field_name='date', lookup_expr='gte')
     channel = filters.CharFilter(field_name='channel', lookup_expr='exact')
 
     country = filters.CharFilter(field_name='country', lookup_expr='exact')
     os = filters.CharFilter(field_name='os', lookup_expr='exact')
 
     groupby = GroupByFilter()
-    annotate = AnnotateFilter()
     CPI = CpiFilter()
+    annotate = AnnotateFilter()
+
 
     class Meta:
         model = Logs
-        fields = ['date_mx', 'date_mn', 'channel', 'country', 'os']
+        fields = ['date_from', 'date_to', 'channel', 'country', 'os']

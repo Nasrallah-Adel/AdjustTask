@@ -18,7 +18,7 @@ cd to folder of project
 if open project for first time use "*```docker-compose  up --build```*" , if you use it before without change the 
  setting of docker file
  or docker-compose you can just use "*```docker-compose  up```*" 
- 
+ - the dataset will upload to database when you run the project when db is empty
  ## after run project
  -  open your browser and type [adjust.localhost](adjust.localhost)
  - the project will open on swagger documentation of API
@@ -72,4 +72,4 @@ http://adjust.localhost/api/search/?country=CA&groupby=channel&CPI=true&annotate
 
   ![first](docs/adjust10.png)
   ![first](docs/adjust11.png)
-  
+    

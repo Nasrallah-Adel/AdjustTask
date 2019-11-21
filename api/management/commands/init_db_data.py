@@ -4,7 +4,6 @@ from django.core.management.base import BaseCommand
 from django.db.models import Sum, FloatField
 from django.db.models.functions import Cast
 
-
 from api.models import Logs
 
 
@@ -36,4 +35,3 @@ class Command(BaseCommand):
                 print(f'Processed {line_count} lines.')
         else:
             print("Database Already have data")
-        print(Logs.objects.filter().values('os').order_by().annotate(CPI= Sum('installs')))

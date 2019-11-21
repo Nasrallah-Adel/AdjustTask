@@ -17,6 +17,7 @@ class Logs(models.Model):
     installs = models.IntegerField(null=True, blank=True)
     spend = models.FloatField(null=True, blank=True)
     revenue = models.FloatField(null=True, blank=True)
+    CPI = models.FloatField(null=True, blank=True)
 
     class Meta:
         db_table = 'Logs'

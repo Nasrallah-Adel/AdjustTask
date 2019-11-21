@@ -1,4 +1,5 @@
-from django.db.models import Sum
+from django.db.models import Sum, FloatField
+from django.db.models.functions import Cast
 from django_filters import Filter, FilterSet, filters
 
 from api.models import Logs
@@ -10,8 +11,9 @@ class GroupByFilter(Filter):
             values = list(values.split(','))
         except:
             return qs
-
-        return qs.values(*values)
+        if values is None:
+            return qs
+        return qs.values(*values).order_by()
 
 
 class AnnotateFilter(Filter):
@@ -20,6 +22,13 @@ class AnnotateFilter(Filter):
             return qs
         filter = {val: Sum(val) for val in values.split(',')}
         return qs.order_by().annotate(**filter)
+
+
+class CpiFilter(Filter):
+    def filter(self, qs, value):
+        if value:
+            return qs.order_by().annotate(CPI=Cast(Sum('spend') / Sum('installs'), FloatField()))
+        return qs
 
 
 class LogFilter(FilterSet):
@@ -32,6 +41,7 @@ class LogFilter(FilterSet):
 
     groupby = GroupByFilter()
     annotate = AnnotateFilter()
+    CPI = CpiFilter()
 
     class Meta:
         model = Logs

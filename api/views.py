@@ -21,9 +21,10 @@ class SearchListView(ListAPIView):
     queryset = Logs.objects.all().order_by('id').distinct()
     pagination_class = StandardResultsSetPagination
     serializer_class = LogSerializer
-    filter_backends = [filters.OrderingFilter,
-                       django_filters.rest_framework.DjangoFilterBackend]
-
-    ordering_fields = ['date', 'channel', 'country', 'os', 'impressions', 'clicks', 'installs', 'spend', 'revenue']
+    filter_backends = [
+        django_filters.rest_framework.DjangoFilterBackend, filters.OrderingFilter, ]
 
     filter_class = LogFilter
+
+    ordering_fields = ['date', 'channel', 'country', 'os', 'impressions', 'clicks', 'installs', 'spend', 'revenue',
+                       'CPI']
